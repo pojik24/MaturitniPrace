@@ -71,12 +71,6 @@ class App:
         self.sirkaTlacitkaOdpovedi = self.img_tlacitkoOdpoved.get_width()
         self.sirkaTlacitkaQuit = self.img_quit.get_width()
 
-        self.tlacitkoQuit = None
-        self.tlacitkoOdpoved0 = None
-        self.tlacitkoMapa = None
-        self.tlacitkoRestart = None
-        self.tlacitkoPredmet1 = None
-
         self.zobrazuj_otazku = False
         self.zobrazuj_mapu = False
         self.zobrazuj_menu = True
@@ -149,7 +143,7 @@ class App:
                 self.mapa_update()
 
         #handler eventů main menu
-        if self.tlacitkoQuit is not None and self.zobrazuj_menu:
+        if self.zobrazuj_menu:
             if self.tlacitkoQuit.handle_event(event):
                 self._running = False
 
@@ -162,7 +156,7 @@ class App:
                 self.zobrazuj_add = True
 
         #handler eventů game over menu
-        if self.tlacitkoRestart is not None and self.zobrazuj_game_over:
+        if self.zobrazuj_game_over:
             if self.tlacitkoQuit2.handle_event(event):
                 self._running = False
             
@@ -176,7 +170,7 @@ class App:
                 self.zobrazuj_game_over = False
 
         #handler eventů souboje/otázky
-        if self.tlacitkoOdpoved0 is not None and self.zobrazuj_otazku:
+        if self.zobrazuj_otazku:
             if self.tlacitkoOdpoved0.handle_event(event) and str(self.otazka.vsechnyOdpovedi[0]) == str(self.otazka.spravnaOdpoved):
                 if self.souboj(hrac, self.tvor):
                     hrac.gold = hrac.gold + self.tvor.gold
@@ -214,7 +208,7 @@ class App:
                     self.zobrazuj_mapu = False
 
         #handler eventů obchodu
-        if self.tlacitkoPredmet1 is not None and self.zobrazuj_obchod:
+        if self.zobrazuj_obchod:
             if self.tlacitkoPredmet1.handle_event(event) and self.predmety[0].cena <= hrac.gold:
                 self.predmety[0].pouzit()
                 hrac.gold = hrac.gold - self.predmety[0].cena
@@ -319,6 +313,10 @@ class App:
     def zobraz_mapu(self):
         self._display_surf.blit(self.img_mapa, (int(self.sirka/2 - 300), int(self.vyska/2 - 300)), ((hrac.pozice[0]*200)-400, (hrac.pozice[1]*200)-400, 600, 600))
         self._display_surf.blit(self.img_mapaOverlay, (int(self.sirka/2 - 50), int(self.vyska/2 - 50)))
+        font = pygame.font.SysFont("calibri", 41)
+        text_img1 = font.render("Pro pohyb použij W,A,S,D", True, (0,0,0))
+        self._display_surf.blit(text_img1, (20, 800))
+
 
     def mapa_update(self):
         if self.mapa[hrac.pozice] == "L":
@@ -420,6 +418,6 @@ class App:
         self.tlacitkoQuit2.draw(self._display_surf)
 
 if __name__ == "__main__" :
-    hrac = Hrac("Smil Flek z Nohavic", 50, "obrazky/ritíř_1.png", (5,5), 50)
+    hrac = Hrac("Smil Flek z Nohavic", 50, "obrazky/ritíř_1.png", (5,5), 10)
     theApp = App()
     theApp.on_execute()
