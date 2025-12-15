@@ -1,0 +1,10 @@
+Tema;Otazka;SpravnaOdpoved;SpatnaOdpoved1;SpatnaOdpoved2;SpatnaOdpoved3
+Planimetrie;Jaký je vzoreček pro výpočet obsahu lichoběžníku?;(a + c)*v/2;(a + c)*2/v;(a + b)*v/2;(a + b)/2
+Planimetrie;Jaký je vzoreček pro výpočet obsahu šestiúhelníku?;(3*√3)/2*a²;(2*√3)/3*a²;(2*√2)/3*a²;(3*√3)/2*a³
+Planimetrie;Jak se vypočítá obsah obdélníku?;S = a · b;S = a + b;S = 2a + 2b;S = a² + b²
+Planimetrie;Jak se nazývá úsečka spojující vrchol trojúhelníka se středem protější strany?;Těžnice;Výška;Osa úhlu;Mediána
+Planimetrie;Jaký je obvod kruhu o poloměru r?;O = 2πr;O = πr²;O = r²;O = πr
+Planimetrie;Jaký má čtverec úhlopříčku, pokud má stranu délky a?;u = a√2;u = 2a;u = a/2;u = √a
+Planimetrie;Jaký je obsah rovnoramenného trojúhelníka se základnou b a výškou v?;S = (b · v)/2;S = b · v;S = (b + v)/2;S = (b² + v²)/2
+Planimetrie;Jaký bod je středem kružnice opsané trojúhelníka?;Průsečík os stran;Průsečík výšek;Průsečík těžnic;Průsečík středních příček
+Planimetrie;Jak zní kosinová věta?;c² = a² + b² - 2ab cosγ;c² = a² + b² - 2ab cosα;c² = a² - b² + 2ab cosγ;c² = a² - b² + 2ab cosα
