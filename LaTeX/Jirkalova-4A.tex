@@ -1,0 +1,217 @@
+% Šablona pro maturitní práci Gymnázia Jírovcova 8, České Budějovice
+% Autoři šablony: Jonáš Havelka, Michal Kočer, Daniel Sýkora
+% Typ dokumentu: report
+% veškeré úpravy v soubor MP.sty (styl maturitní práce)
+\documentclass[12pt]{report}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{MP}						  % Import stylu maturitní práce
+\author{Sára Jirkalová}                  % AUTOR PRÁCE
+\title{Vědomostní hra}    % NÁZEV PRÁCE
+\date{6. února 2025}                 % DATUM ODEVZDÁNÍ PRÁCE
+\vedouci{Dr.rer.nat. Kočer Michal} % VEDOUCÍ PRÁCE
+\place{V Českých Budějovicích}
+\skolnirok{2024/2025}                  % ŠKOLNí ROK
+\logo{\includegraphics[scale=1.25]{GJ8_logotyp}} %Logo školy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document} %%%%%%% začátek dokumentu
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Titulní stránka + úvodní povinné stránky
+\pagenumbering{roman}                   % číslování stránek římskými číslicemi
+	\mytitlepage						% Vygenerování titulní strany
+	
+	\prohlaseni{
+		Prohlašuji, že jsem tuto práci vypracovala samostatně s vyznačením všech použitých pramenů.
+	}	
+	
+	\abstrakt{
+								% Abstrakt 
+	}{
+								% Klíčová slova
+	}
+	
+	\podekovani{
+								% Poděkování
+	}
+	
+   {\tableofcontents\newpage}			% Obsah
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% VLASTNÍ PRÁCE
+\addtocounter{page}{1}		% Posunutí countru stránek
+\pagenumbering{arabic}		% Číslování stránek arabskými číslicemi
+\chapter*{Úvod}     % úvod práce 
+	
+	
+	
+%%%%%%%%%%%%%% TEORETICKÁ ČÁST %%%%%%%%%%%%%%%%%%	
+\part{Vědomostní hry v současnosti}  % název teoretické části )
+	
+\chapter{Vědomostní hra}
+Pojem vědomostní hra v této maturitní práci označuje hru založenou na odpovídání na otázky na různá témata, např. geografie, biologie, jazyky, či všeobecný přehled. Vědomostní hry lze zařadit mezi tzv. didaktické hry. To jsou takové hry, jejichž primární cíl není zábava, ale vzdělávání. Tyto hry se snaží zlepšit a zefektivnit učení za pomocí prvků herního designu, např. systém výzev a odměn, zpětná vazba atd.\cite{Arnold2016}\\
+Videohry jako nástroj pro učení se využívají hlavně proto, že zvyšují motivaci studentů a tím zvyšují i čas, který stráví učením se.\cite{Dondlinger2007}	Pokud jsou tyto hry navržené správně, dokáží přinášet lepší výsledky než tradiční způsoby učení. Nicméně, vědomostní a didaktické hry často nedokáží být dostatečně efektivní v zapojení a motivování studentů a vzbuzování jejich zájmu.\cite{Arnold2016}
+	
+\chapter{Dobyvatel}
+Hra Dobyvatel je českou verzí maďarské vědomostní a strategické online hry \textit{ConQUIZtador}, vyvíjenou společností \textit{THX Games}.\cite{Macich2010} V této hře proti sobě bojují tři hráči o jednotlivá území České republiky odpovídáním na dva typy otázek (\textit{otázky s výběrem správné odpovědi} a \textit{tipovací otázky}). Když hráč odpoví správně, nebo lépe než ostatní hráči v případě \textit{tipovacích otázek}, má možnost zabrat nějaké území. Za každé získané území dostane hráč body. Vyhrává hráč s nejvyšším počtem bodů. \cite{Dobyvatel2017}\\
+Odpovědí na \textit{tipovací otázku} je vždy celé nezáporné číslo a vyhrává ten hráč, kterého odpověď byla nejblíže té správné. Pokud je několik odpovědí stejně daleko, vyhrává ten hráč, který odpověděl jako první.
+U \textit{otázek s výběrem správné odpovědi} mají hráči vždy na výběr ze čtyř možných odpovědí, z nichž je vždy právě jedna správná. \cite{Dobyvatel2018}
+ 
+	\section{Historie}
+	Hra Dobyvatel byla spuštěna v roce 2010 na portálu \textit{TV Nova}. Již během prvních dvou let si hru vyzkoušelo více než 500 000 lidí. \cite{TVNova2012} V roce 2016 byla změněna grafická úprava hry a byly i pozměněny některé herní mechaniky. Tato změna se však nesetkala s velkým úspěchem v hráčské komunitě a vznikla dokonce petice za obnovení starého \textit{Dobyvatele}. Tato petice však nezískala ani tisíc podpisů\cite{Dombrovsky2016} a "\textit{nový Dobyvatel}" přetrval až do roku 2021. Na konci tohoto roku byla totiž webová verze hry \textit{Dobyvatel} zrušena kvůli ukončení podpory \textit{Adobe Flash Player}.\cite{THXGames2021} Dnes je možné si hru zahrát pouze na mobilních zřízeních. Tato mobilní verze \textit{Dobyvatele} však není mezi hráči příliš populární a to hlavě kvůli novému 3D vizuálu.\cite{Dobyvatel2025} Z toho důvodu začaly vznikat různé fanouškovské projekty, které se snaží simulovat původní webovou aplikaci. Jedním z takových projektů je hra \textit{Vyzyvatel}. Autor, vlastním jménem  Maroš Mečiar, někdy vystupující pod přezdívkou\textit{ Maroso}, se svou hrou snažil nejen přiblížit původnímu dobyvateli, ale i přidat něco navíc. Například si hráči mohou vybrat pouze sady otázek z určitých oborů, nebo si dokonce napsat vlastni.\cite{Meciar2025}
+	
+	\section{Grafické rozhraní}
+	Grafické rozhraní hry Dobyvatel se v průběhu času několikrát značně změnilo.  V prvních verzích bylo trochu jednodušší, využívalo teplých barev a odpovídalo szylu své doby. Zobrazení mapy v tomto rozhraní bylo v perspektivě což ovšem změnilo velikostní poměr jednotlivých krajů a některé vypadají nepřiměřeně velké. V dalších verzích bylo grafické rozhraní čistě 2D. Všechny textury a ikony byly v kresleném stylu, který byl přehlednější a opět odpovídal své době. Nynější verze mobilní aplikace dobyvatel využívá velkého množství 3D prvků, které ale kvůli výkonu průměrných mobilních telefonů nemohou být moc detailní a působí tedy levně. Celá aplikace pak také využívá tmavších barev, což přehlednosti moc nepřidává.
+	
+\begin{figure}
+    \centering
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[scale=0.2]{stary_dobyvatel_mapa}
+        \caption{Ukázka GUI "starého" dobyvatele \cite{2013}}
+        \label{dobyvatel_fig}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[scale=0.2]{Novy_dobyvatel_mapa}
+        \caption{Ukázka GUI mobilní aplikace Dobyvatel}
+        \label{dobyvatelGUI}
+    \end{minipage}
+
+\end{figure}
+
+	\section{Průběh hry}
+	Průběh hry se liší v závislosti na tom, zda se jedná o \textit{Běžnou hru}, nebo \textit{Dlouhou kampaň}. \textit{Běžná hra} má tří fáze. Při první fázi, s názvem \textit{Stavba základny}, hra náhodně přidělí každému hráči základnu na jednom z polí. Tato pole jsou vybrána tak, aby se nedotýkala. Pole se základnou má hodnotu 1000 bodů a obsahuje tři věže. Druhá fáze se jmenuje \textit{Expanze}. Při této fázi dostávají všichni hráči tipovací otázku. Vítězný hráč si může vybrat dvě pole, hráč který se umístil druhý jedno pole. Hráči si mohou vybrat pouze prázdná pole, a pokud takové existují, dotýkající se jejich základny nebo jejich jiného pole. Hráč dostane 200 bodů za každé takto zabrané území. Třetí a poslední fáze s názvem \textit{Bitva} se skládá ze čtyř částí, neboli kol, při kterých hráči postupně útočí na nepřátelská území. Pořadí hráčů je v každém kole, vyjma posledního, jiné. V posledním kole je pořadí určeno počtem bodů hráčů. Kdo má více bodů, útočí dříve. Útočník a hráč na kterého je útočeno (obránce) odpovídají na otázku s jednou správnou odpovědí. Třetí hráč je pozoruje, ale jinak se boje neúčastní. Pokud útočník neodpověděl správně, nebo na otázku nereagoval, vyhrává obránce. Pokud útočník zvolí správnou odpověď a obránce zvolí špatnou, vyhrává útočník a pokud odpoví oba hráči správně, rozhodne se bitva tipovací otázkou. Pokud útočník vyhraje, získá pole i s body, a bodová hodnota tohoto pole se nastaví na 400. Obránce tím pádem přichází nejen o území, ale taky o body, které tomuto území náležely. Pokud se ale obránci podaří území ubránit správným zodpovězením otázky, získá defenzivní bonus 100 bodů. Při útoku na základnu musí útočník rozbít všechny její věže, to znamená, že musí ve svém tahu zodpovědět jednu otázku za každou věž. Pokud se obránci podaří úspěšně ubránit, bitva končí, ale všechny již dobyté věže zůstanou dobyté a při dalším pokusu je útočník nemusí dobývat znova. Když padne poslední věž, obránce ztrácí všechno své území a body ve prospěch útočníka. Pokud poslední bitva nerozhodne o výherci celé hry, dostanou hráči ještě jednu tipovací otázku za 10 bodů. \cite{THXGames2023}\\
+\textit{Dlouhá kampaň} je rozdělena do čtyř fází. První se nazývá\textit{ Stavba základny}. Během této fáze si na rozdíl od\textit{ Běžné hry} hráči vybírají umístění základny sami. Nejdříve si vybírá červený hráč, poté modrý a nakonec zelený. Barvy jsou hráčům přiděleny náhodně. Stejně jako u\textit{ Běžné hry} se základny nemohou dotýkat a každá má hodnotu 1000 bodů. Následuje fáze s názvem \textit{Expanze}. Zde si hráči vybírají sousední území a mohou je obsadit, pokud správně odpoví na otázku s výběrem správné odpovědi. Takto získaná území mají hodnotu 200 bodů. Tato fáze má šest kola a pořadí hráčů se mění v každém kole. Třetí fáze se jmenuje \textit{Rozdělení volných území}. V této fázi dostávají hráči tipovací otázky a výherce každé této otázky si může zabrat jedno volné území. Tato pole mají hodnocení 300 bodů. Fáze končí obsazením posledního volného území. Čtvrtá fáze,\textit{ Bitva}, probíhá téměř stejně jako u \textit{Běžné hry}. Jediným rozdílem je to, že si hráč může dostavět padlé věže své základny zodpovězením\textit{ otázky s výběrem správné odpovědi}.\cite{Dobyvatel2018}
+
+
+\chapter{Sporcle}
+\textit{Sprorcle} je webová a mobilní aplikace umožňující lidem vytvářet a hrát vědomostní kvízy.\cite{Sporcle2025a} Tyto kvízy jsou rozděleny do 15 hlavních kategorií: sporty, geografie, hudba, filmy, televize, jen pro zábavu, historie, literatura, jazyk, věda, gaming, zábava, náboženství, svátky a ostatní. \textit{Sporcle} také nabízí několik formátů kvízů, např. klasický, kdy musí hráč napsat správnou odpověď, klikací, s mapu, atd.  Existuje také několik módů, které může autor kvízu nastavit, například minové pole, kvíz se automaticky ukončí po zadání špatné odpovědi, pevné pořadí, hráč nemůže přeskakovat mezi otázkami, atd.\cite{Sporcle2025}
+
+\section{Historie}
+Matt Ramme zaožil Sporcle v lednu roku 2007. První kvíz, s názvem: "Vyjmenuj prezidenty USA", byl přidán v létě téhož roku. Při zakládání předpokládal, že většina uživatelů budou starší lidé, ale aplikace se uchytila i mezi studenty. \cite{Aucoin2009} Aby tento zájem ještě více vývojáři podpořili, přidali v listopadu roku 2010 žebříček univerzit podle toho, kolik jejich studentů stránku navštívilo.\cite{Woodford2011} V roce 2010 byla vyvinuta mobilní aplikace \textit{Sporcle} pro iOS. Už v roce 2013 \textit{Sporcle} přesáhlo jednu miliardu zahrání.
+
+\chapter{Kahoot!}
+\textit{Kahoot!} je Norská online vzdělávací platforma umožňující lidem tvořit a hrát kvízy založené na otázkách s výběrem správné odpovědi.\cite{Kahoot2025} Původní prototyp této platformy byl vytvořen už v roce 2006\cite{wang2007lecture}, ovšem k největšímu rozmachu došlo až v roce 2020 kvůli pandemii COVID-19.\cite{Hanoa2020}\\
+Cílem této platformy je zvýšení aktivního zapojení, motivace a soustředění žáků a studentů a zlepšit jejich studijní výsledky. Aplikace\textit{ Kahoot!} je také používána jako nástroj formativního hodnocení nebo jako nahrazení tradičních výukových prostředků.\cite{Wang2020}
+
+\section{Historie}
+Původní prototyp který vedl až ke spuštění platformy \textit{Kahoot!} se nazýval \textit{Lecture Quiz}. Byla to mobilní aplikace vyvíjená Alfem Inge Wangem, Terje Øfsdahlem a Ole Kristian Mørch-Storsteinem na katedře informatiky Norské univerzity vědy a technologie, která měla lépe zapojit studenty do výuky. Poprvé byla použita v roce 2007 na univerzitě, kde byla vyvíjena, na přednášce a získala od studentů pozitivní recenze. Studenti uvedli, že se více soustředili na přednášku a hra jim přišla přínosná pro ně i pro profesora. Hra však měla pár technických problémů, které se ale podařilo vyřešit.\cite{wang2007lecture} \\
+Druhá verze s názvem\textit{ Lecture Quiz 2.0} vyšla v roce 2011 na téže univerzitě jako verze předchozí. Autoři projektu se u druhé verze zaměřili zejména na stabilitu celého systému, zjednodušení používání pro studenty i učitele a dobrou dokumentaci usnadňující další vývoj platformy. Těchto cílů chtěli dosáhnout vytvořením webového rozhraní. Testu této vylepšené hry se zúčastnilo 21 studentů v rámci výuky a test tentokrát proběhl téměř bez technických závad. Z dotazníkového šetření uskutečněného po testu vyplývá, že cíle tohoto projektu byly dosaženy.\cite{Wu2011}\\
+Společnost \textit{Kahoot!} byla založena v roce 2012 Mortenem Versvikem, Johanem Brandem a Jamiem Brookerem. Technologie této společnosti je zložena a výzkumu, jenž provedl Morten Versvik, student profesora Alfa Inge Wanga, který se také zapojil do vývoje této vědomostní hry. V roce 2013 byla tato platforma poprvé zpřístupněna pro veřejnost.\cite{Kahoot2025} V už roce 2017 měla tato hra přes 40 milionů aktivních hráčů měsíčně\cite{Keane2017} a tento rok také společnost \textit{Kahoot!} vydala mobilní aplikaci, skrze kterou mohou učitelé zadávat žákům domácí ůkoly.\cite{Ravipati2017}
+
+\section{Průběh hry}
+Jednotlivé kvízy se nejčastěji hrají pomocí jedné velké obrazovky a mobilních telefonů pro každého hráče. Na velké obrazovce se zobrazí otázka a výběr odpovědí a hráči pomocí mobilních zařízení odpovídají. Každý hráč hraje pod zvolenou přezdívkou, takže kvíz může být anonymní, což pomáhá snižovat strach ze špatné odpovědi. Za každou správnou odpověď dostanou hráči počet bodů podle toho, jak rychle odpověděli. Mezi otázkami se vždy zobrazí na velké obrazovce správná odpověď a distribuce odpovědí, což dává zpětnou vazbu tomu, kdo kvíz vytvořil. Například, pokud většina hráčů zadala stejnou špatnou odpověď, mohla být otázka položena nepřesně. Poté se na obrazovce zobrazí přezdívky a body pěti nejúspěšnějších hráčů. Zároveň každý hráč vidí individuální zpětnou vazbu na své obrazovce.\cite{Wang2015} Hráč s největším počtem bodů vyhrává. Tento styl hry se dá využívat například ve školách, ve firmách nebo na různých společenských akcích.\\
+Druhá možnost jak hrát \textit{Kahoot!} nepotřebuje velkou obrazovku. Každý hráč na svém zařízení vidí otázku i možné odpovědi a kvíz si může zahrát kdekoli a kdykoli. Tuto možnost je vhodné používat například na domácí úkoly, školení, atd. \cite{Kahoot2025a}
+
+\section{Grafické rozhraní}
+Vývojáři zvolili pro hru \textit{Kahoot!} jednoduchý vizuál, založený na výrazných a kontrastních barvách, které dokáží snadno upoutat pozornost, ale zároveň nejsou moc křiklavé a neruší hráče. Každá odpověď je vyznačena jak barvou, tak i tvarem, což může být velmi prospěšné pro lidi trpící barvoslepostí. Jeden problém, kterého by si hráč mohl povšimnout je ten, že jedna z odpovědí, ta která je napsána na žlutém pozadí, může být na některých obrazovkách špatně čitelná a může tím pádem znevýhodňovat některé hráče. 
+
+\section{Vliv na vzdělávání}
+Nedostatek motivace mezi žáky může vyústit ve snížení efektivity vzdělání a negativní atmosféru ve třídě. Tento problém je ještě zřetelnější na vysokých školách s velkými třídami a málo interakce mezi přednášejícím a studenty. Výzkum ukázal, že studenti, kteří jsou aktivně zapojeni do výuky se naučí více, než pasivní studenti. Jedním ze způsobů jak žáky a studenty do výuky více zapojit jsou systémy pro odpovědi studentů (SRS - z anglického "Student response systems"). Dalším způsobem jak motivaci žáků a studentů zvýšit, je učení pomocí her. \textit{Kahoot!} je kombinací systému pro odpovědi studentů a videohry.  \cite{Wang2020}\\
+Většina studií porovnávající efekt aplikace \textit{Kahoot!} a jiných výukových prostředků na výsledky vzdělávání se shoduje v tom, že používání hry \textit{Kahoot!} při výuce způsobuje zlepšení výsledků vzdělávání oproti nejen tradičním výukovým nástrojům, ale i oproti jinému systému pro odpovědi studentů, který neměl herní prvky. Studenti kteří používali \textit{Kahoot!} se také cítili více aktivně zapojeni do výuky a byli méně ve stresu. \cite{turan2018}\\
+Další studie se zabývala rozdíly mezi dlouhodobým a krátkodobým používáním hry \textit{Kahoot!}. Porovnávala názory studentů na několik otázek poté, co hráli Kahoot! v jedné přednášce s názory na téže otázky po používání \textit{Kahootu} během celého semestru. Tato studie zjistila, že největší rozdíl byl v dynamice ve třídě. Studenti, kteří hráli \textit{Kahoot!} jednou spolu během hry více komunikovali. U ostatních otázek byly rozdíly minimální.\cite{Wang2015}\\
+Jedna studie se také věnovala vlivu hudby a bodování, které jsou oboje součástí aplikace a mají za cíl zvýšit zájem a soutěživost mezi studenty, na motivaci, koncentraci a zájem studentů a dynamiku ve třídě. Bylo zjištěno, že přítomnost hudby měla vliv na celkovou energii studentů. Když byla hudba zapnutá, studenti více komunikovali, diskutovali a byli otevřeni dotazům vyučujícího. Bodování zvyšovalo motivaci studentů. Na druhou stranu měli však studenti bez bodování častěji pocit, že se naučili něco nového.\cite{Wang2016}
+
+
+
+
+%%%%%%%%%%%%%% PRAKTICKÁ ČÁST %%%%%%%%%%%%%%%%%%	
+
+\part{Tvorba vědomostní počítačové hry} % název praktické části 
+
+\chapter{Cíl projektu}
+Cílem tohoto projektu bylo naprogramovat vědomostní hru a použít přitom moderní postupy agilního programování. Tato vědomostní hra by měla být vhodná pro použití ve školním prostředí. Dále by si měl uživatel moct přidat vlastní otázky a vybrat si pouze témata, která se potřebuje naučit, nebo která ho zajímají. Dále by měl hra být pochopitelná i pro lidi, kteří nikdy počítačové hry nehráli.\\
+ Na vytvoření tohoto programu jsem se rozhodla použít programovací jazyk \textit{Python} s rozšířením \textit{Pygame}, které je přímo určené na vývoj her.  
+	\section{Agilní metody}
+	Agilní metody vývoje softwaru jsou takové metody, které následují hodnoty Manifestu Agilního vývoje software a jeho 12 principů. Autoři zvolili název \textit{Agilní}, protože odráží důležitost adaptability a připravenosti na změnu. Změna je totiž pro Agilní vývoj softwaru velice důležitá. Jedním ze čtyř bodů Manifestu Agilního vývoje software je: Reagování na změny před dodržováním plánu. Vývojáři pracující agilně tudíž vítají změnu požadavků i během samotného vývoje. I proto je důležitý další bod manifestu: Spolupráce se zákazníkem před vyjednáváním o smlouvě. Při Agilním vývoji je tudíž nutná neustálá komunikace se zákazníkem. K tomuto se váže i jeden z dvanácti principů Agilního Vývoje, a to sice: Dodáváme fungující software v intervalech týdnů až měsíců,
+s preferencí kratší periody. \cite{Beck2001a} Dalším bodem manifestu je: Jednotlivci a interakce před procesy a nástroji. Jeden z rozdílů mezi Agilním a jinými přístupy k vývoji softwaru je zaměření na lidi a jejich interakce. Posledním, čtvrtým, bodem Agilního Manifesta je: Fungující software před vyčerpávající dokumentací.\cite{Beck2001} \cite{AgileAlliance2025}
+		\subsection{Historie}
+		Za počátek Agilního vývoje se většinou považuje schůze 17 vývojářů v Utahu v roce 2001. Agilní přístup ovšem existoval i předtím, jen nebyl ucelený a neměl zatím název. Už v polovině devadesátých let vymýšleli lidé nové postupy, které se podobaly dnešnímu Agilnímu vývoji. Manifest Agilního vývoje softwaru vznikl právě na již zmíněné schůzi v Utahu. Tento manifest shrnul základní myšlenku a poprvé zde byl užit termín Agilní vývoj softwaru. V následujících měsících doplnili autoři manifest o 12 principů agilního vývoje softwaru. Na konci roku 2001 byla také vytvořena\textit{ Agile Alliance}. Jejím cílem je spojovat lidi vyvíjející software, aby mohli sdílet nápady a zkušenosti. \cite{AgileAlliance2025a} 
+		\subsection{Extrémní programování}
+		Jednou z agilních metod vývoje je tzv. Extrémní programování (XP). Jedná se o metodiku pro malé až střední týmy, které vyvíjejí software a mají nejasné, nebo často se měnící zadání. Cíl XP je snižovat projektová rizika, zlepšit schopnost reagovat na změny a zvýšit produktivitu. \\
+		Tato metodika je vlastně soubor několika postupů. Těmi postupy jsou:  
+		\begin{itemize}
+  \item Plánovací hra (Rychle vytvoříme plán na další verzi, pokud je skutečnost jiná, plán zaktualizujeme)
+  \item Malé verze (Rychle vytvoříme základní verzi projektu, kterou poté vytváříme další verze v krátkých cyklech)
+  \item Metafora (Celý tým má stejnou představu o tom, jak má celý systém vypadat)
+  \item Jednoduchý návrh (Systém by měl být navržen vždy co nejjednodušeji)
+  \item Testování (Programátoři píší neustále testy jednotek, zákazník provádí testy funkcionality)
+  \item Refakorizace (Programátoři vylepšují program bez toho, aby změnili jeho funkcionalitu) 
+  \item Párové programování (Všechen kód by měl být psán v párech)
+  \item Společné vlastnictví (Všichni programátoři nesou zodpovědnost za celý kód, každý může jakoukoli část kdykoli upravit)
+  \item Nepřetržitá integrace, 
+  \item 40-hodinový pracovní týden (Pracovní týden by neměl překročit 40 hodin a pokud je zapotřebí pracovat přesčas, nikdy takto nepracujeme dva týdny za sebou)
+  \item Zákazník na pracovišti (zákazník by měl mít na pracovišti zástupce, kterému můžou programátoři neustále klást dotazy a který může provádět testy funkcionality)
+  \item Standarty pro psaní zdrojového kódu (Zdrojový kód by měl mít jednotnou strukturu)
+		\end{itemize}
+		Jedním z kontroverznějších z těchto postupů je bezpochyby párové programování. Jedná se o postup, při kterém programují dva lidé zároveň na jednom počítači, s jednou klávesnicí a jednou myší. Celý proces spočívá v tom, že vždy jeden z programátorů píše a druhý ho kontroluje a zároveň přemýšlí nad dalším problémem, dalším testem nebo možnou refaktorizací. Výhodou oproti tradičnímu postupu je například fakt, že při párovém programování se více chyb odhalí už při samotném psaní kódu. Další výhodou je i to, že když člověk programuje s někým, tak bude nejspíše produktivnější, protože se z úcty ke druhému nenechá rozptýlit telefonátem nebo jinou soukromou záležitostí. To nás ale přivádí k jedné z nevýhod a tou je to, že tento proces funguje pouze za předpokladu, že se tito dva lidé vzájemně snesou a mají k sobě dostatek respektu.\\
+		Podle metaanalýzy z roku 2009 nelze jednoznačně určit, zda je párové programování lepší než sólo programování, ale vždy záleží na dané situaci. Párové programování je totiž užitečnější, pokud potřebujeme jednoduchý úkol splnit co nejrychleji, i za cenu ztracené kvality, nebo potřebujeme splnit složitý úkol kvalitněji, i za vyšší cenu.\cite{Hannay2009} Párové programování také samozřejmě nebude lepší, pokud se členové týmu nerespektují, nebo se nesnesou.
+		\subsection{Agilní metody v této práci}
+		Pro svou práci jsem se rozhodla použít právě extrémní programování, protože má jasně dané postupy kterými jsem se mohla při psaní programu řídit. Vzhledem k povaze a velikosti projektu a vzhledem k tomu, že nepracuji v týmu, jsem se neřídila všemi postupy, ale vybrala jsem jen ty, které se k mojí práci hodí. I přesto, že jsem nepoužila všechny postupy jsem pořád postupovala agilně. Postupy, které jsem vybrala jsou: Plánovací hra, Malé verze, Metafora a Jednoduchý návrh.\\
+		Pracovala jsem tedy tak, že jsem nejdříve vytvořila velice jednoduchý prototyp mé hry a postupně jsem přidávala další funkcionalitu v malých verzích. Vždy když jsem jednu dokončila, udělala jsem plán té další. 
+	\section{Původní návrh}
+	Jelikož jsem postupovala Agilně, měla jsem ze začátku pouze hrubý návrh, který jsem postupně upřesňovala. Počáteční návrh byl vědomostní hra, ve které by hráč soutěžil s počítačem, nebo jiným hráčem. Hráč by dostával otázky z různých oborů a za správnou odpověď by dostal body. Vyhrál by ten, kdo by měl nejvíce bodů. Poté, co jsem dokončila demo takovéto hry, jsem se rozhodla, že hráč bude rytíř procházející mapu a pokaždé, když vejde na nové políčko, má nějakou šanci na to, že ho napadne nějaká příšera a začne souboj. Při souboji bude hráč dostávat otázky a vždy když správě odpoví, dá příšeře nějaké poškození, jestliže odpoví špatně, poškození naopak dostane od příšery. Za každou zabitou příšeru by hráč dostal pár peněz herní měny, za které by si potom mohl koupit předměty, které by mu zvýšily šanci na výhru. 
+
+\chapter{První verze}
+	V této verzi jsem vytvořila jednoduchý prototyp mé hry. Byla to pouze terminálová aplikace pro dva hráče, kteří se střídali v odpovídání na otázky a nakonec aplikace vyhodnotila, který hráč získal více bodů. \\
+	Začala jsem importováním modulu csv, který jsem použila na manipulaci s databází otázek, která měla formu CSV souboru. Poté jsem nadefinovala třídu \emph{Otazka}. Tato třída má čtyři atributy, a těmi jsou: Typ, jenOtazka, spravnaOdpoved, vsechnyOdpovedi. Její konstruktor má parametr \textit{cisloOtazky}. Tento konstruktor vyhledá v tabulce otázku s požadovaným číslem a přiřadí atributům třídy odpovídající proměnné.   
+
+\begin{lstlisting}[language=Python, caption=Konstruktor třídy \textit{Otazka}]
+import random
+import csv
+
+class Otazka(object):
+    def __init__(self, cisloOtazky):
+        with open("Otazky.csv", mode='r', encoding='utf-8') as soubor:
+            data = csv.DictReader(soubor, delimiter=";")
+            rows = list(data)
+            self.typ = rows[cisloOtazky]["Tema"]
+            self.jenOtazka = rows[cisloOtazky]["Otazka"]
+            self.spravnaOdpoved = rows[cisloOtazky]["SpravnaOdpoved"]
+            self.vsechnyOdpovedi = [rows[cisloOtazky]["SpravnaOdpoved"],rows[cisloOtazky]["SpatnaOdpoved1"],rows[cisloOtazky]["SpatnaOdpoved2"],rows[cisloOtazky]["SpatnaOdpoved3"]]
+\end{lstlisting}
+
+Dále jsem nadefinovala metodu zeptej třídy Demo. Tato metoda má jeden parametr otázka, což je objekt třídy Otázka. Metoda zeptej nejdříve zobrazí hráči otázku a výběr odpovědí v náhodném pořadí. Pro uspořádání odpovědí do náhodného pořadí jsem použila modul random a jeho metodu shuffle. Poté vyzve hráče k zadání správné odpovědi. Poté program ověří správnost odpovědi pomocí metody kontrola, která vrací True pokud je odpověď správná, v opačném případě vrací False. Pokud hráč zadal správnou odpověď, metoda zeptej vrací True a vypíše na terminál "Správně!". Pokud hráč zadal naopak špatnou odpověď, metoda vrátí False a vypíše zprávu "Špatně!".
+
+\begin{lstlisting}[language=Python, caption=Metoda\textit{ zeptej}, extendedchars=true , literate={á}{{\'a}}1 {ý}{{\'y}}1 {ě}{{\v{e}}}1 {š}{{\v{s}}}1 {č}{{\v{c}}}1 {ž}{{\v{z}}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {é}{{\'e}}1 {ď}{{\v{d}}}1 {ň}{{\v{n}}}1 {ť}{{\v{t}}}1 {ů}{{\r{u}}}1 {ú}{{\'u}}1 {ř}{{\v{r}}}1 {Á}{{\'A}}1 {Ý}{{\'Y}}1 {Ě}{{\v{E}}}1 {Š}{{\v{S}}}1 {Č}{{\v{C}}}1 {Ž}{{\v{Z}}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {É}{{\'E}}1 {Ď}{{\v{D}}}1 {Ň}{{\v{N}}}1 {Ť}{{\v{T}}}1 {Ů}{{\r{U}}}1 {Ú}{{\'U}}1 {Ř}{{\v{R}}}1
+]
+def zeptej(self, otazka):
+    ABCD = {"A":0, "B":1, "C":2, "D":3}
+    print(otazka.jenOtazka)
+    random.shuffle(otazka.vsechnyOdpovedi)
+    print(otazka.vsechnyOdpovedi)
+    while True:
+        print("Zadej jednu z možností A, B, C, D")
+        odpoved = input("Zadej odpověď: ")
+        if odpoved in ABCD:
+            break
+    odpoved = otazka.vsechnyOdpovedi[ABCD[odpoved]]
+    if otazka.kontrola(odpoved):
+        print("Správně!")
+        return True
+    else:
+        print("Špatně!")
+        return False
+\end{lstlisting}
+
+Další metodou třídy Otazka je tah. Má jeden parametr hrac (objekt třídy Hrac). Tato metoda vybere náhodnou otázku pomocí funkce randint modulu random. Poté zavolá metodu zeptej a pokud vrátí True, připíše hráči jeden bod.
+
+\begin{lstlisting}[language=Python, caption=Metoda\textit{ tah}, extendedchars=true]
+def tah(self, hrac):
+        otazka = Otazka(random.randint(1,10))
+        spravnost = self.zeptej(otazka)
+        if spravnost:
+            hrac.skore += 1
+\end{lstlisting}
+
+Poslední metodou třídy Demo je run. Tato metoda postupně zavolá funkci tah pro oba hráče a 
+
+%%%%%%%%%%%%% ZÁVĚR
+\chapter*{Závěr}
+
+\nocite{*}
+\printbibliography					% Vytvoří seznam literatury
+\addcontentsline{toc}{chapter}{Bibliografie} 
+\printglossary[title={Zkratky}]		% Vytvoří seznam zkratek%\listoffigures						% Vytvoří seznam obrázků
+\listoftables						% Vytvoří seznam tabulek
+%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%% KONEC %%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,39 @@
+{
+    "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatexmk",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-outdir=temp",
+                "-interaction=nonstopmode",
+                "%DOC_EXT%"
+            ],
+        },
+        {
+            "name": "notify_on_build", // Můžete přidat pokud chcete upozornění na dokončení buildu
+            "command": "notify-send",
+            "args": [
+                "Build finished"
+            ]
+        },
+        {
+            "name": "move_output",
+            "command": "mv",
+            "args": [
+                "temp/%DOCFILE%.pdf",
+                "PDF/"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (xelatex)",
+            "tools": [
+                "xelatexmk",
+                "move_output"
+            ]
+        }
+    ]
+}
