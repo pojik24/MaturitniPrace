@@ -52,10 +52,8 @@ class DemoHrac(object):
         self.skore = 0    
     
 class Demo(object):
-    def __init__(self, pocetPoli, pocetKol, jmenoHrace1, jmenoHrace2):
-        self.pocetPoli = pocetPoli 
+    def __init__(self, pocetKol, jmenoHrace1, jmenoHrace2):
         self.pocetKol = pocetKol
-        self.vsechnaPole = {}
         self.hrac1 = DemoHrac(jmenoHrace1)
         self.hrac2 = DemoHrac(jmenoHrace2)
 
@@ -69,7 +67,6 @@ class Demo(object):
             odpoved = input("Zadej odpověď: ")
             if odpoved in ABCD:
                 break
-
         odpoved = otazka.vsechnyOdpovedi[ABCD[odpoved]]
         if otazka.kontrola(odpoved):
             print("Správně!")
@@ -77,23 +74,20 @@ class Demo(object):
         else:
             print("Špatně!")
             return False
-    
-        
-    def kolo(self, hrac):
-            otazka = Otazka(random.randint(0,3))   #vybíráme random otázku ze všech otázek v dokumentu Otazky.csv
+           
+    def tah(self, hrac):
+            otazka = Otazka(random.randint(1,10))
             spravnost = self.zeptej(otazka)
-            if spravnost == True:
+            if spravnost:
                 hrac.skore += 1
-
 
     def run(self):
         for _ in range(self.pocetKol):
-            self.kolo(self.hrac1)
-            self.kolo(self.hrac2)
+            self.tah(self.hrac1)
+            self.tah(self.hrac2)
             print(f"Aktuální skóre: {self.hrac1.jmeno}:{self.hrac1.skore} / {self.hrac2.jmeno}:{self.hrac2.skore}")
         
-
 if __name__ == "__main__":
-    aplikace = Demo(10, 3, "Lubomír", "Miroslav")
+    aplikace = Demo(3, "Lubomír", "Miroslav")
     aplikace.run()
           
