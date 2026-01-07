@@ -2,14 +2,14 @@ import pygame
 
 #button class
 class Button():
-	def __init__(self, x, y, image, text=""):
-		self.width = image.get_width()
-		self.height = image.get_height()
+	def __init__(self, x, y, obrazek, text=""):
+		self.sirka = obrazek.get_sirka()
+		self.vyska = obrazek.get_vyska()
 		self.x = x
 		self.y = y
 		self.text = text
-		self.image = image
-		self.rect = self.image.get_rect()
+		self.obrazek = obrazek
+		self.rect = self.obrazek.get_rect()
 		self.rect.topleft = (x, y)
 
 	def handle_event(self, event):
@@ -18,54 +18,51 @@ class Button():
 				return True
 		return False
 		
-	def draw(self, surface):
-		#draw button on screen
-		surface.blit(self.image, (self.rect.x, self.rect.y))
+	def zobraz(self, surface):
+		surface.blit(self.obrazek, (self.rect.x, self.rect.y))
 
 		font = pygame.font.SysFont("arial", 40)
 
 		text_img = font.render(self.text, True, (0,0,0))
-		text_len = text_img.get_width()
-		text_height = text_img.get_height()
-		surface.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + int(self.height/2) - int(text_height/2)))
+		text_delka = text_img.get_sirka()
+		text_vyska = text_img.get_vyska()
+		surface.blit(text_img, (self.x + int(self.sirka / 2) - int(text_delka / 2), self.y + int(self.vyska/2) - int(text_vyska/2)))
 
 	
 class Textbox():
-	def __init__(self, x, y, image):
-		self.width = image.get_width()
-		self.height = image.get_height()
+	def __init__(self, x, y, obrazek):
+		self.sirka = obrazek.get_sirka()
+		self.vyska = obrazek.get_vyska()
 		self.x = x
 		self.y = y
-		self.image = image
-		self.state = False
+		self.obrazek = obrazek
+		self.aktivni = False
 		self.text = ""
-		self.rect = self.image.get_rect()
+		self.rect = self.obrazek.get_rect()
 		self.rect.topleft = (x, y)
 
 	def handle_event(self, event):
 		if event.type == pygame.MOUSEBUTTONUP:
 			if self.rect.collidepoint(event.pos):
-				self.state = True
-
+				self.aktivni = True
 			else:
-				self.state = False
+				self.aktivni = False
 
-		if event.type == pygame.TEXTINPUT and self.state:
+		if event.type == pygame.TEXTINPUT and self.aktivni:
 			self.text += event.text
 
-		if event.type == pygame.KEYDOWN and self.state:
+		if event.type == pygame.KEYDOWN and self.aktivni:
 			if event.key == pygame.K_BACKSPACE:
 				self.text = self.text[:-1]
 
-	def draw(self, surface):
-		#draw button on screen
-		surface.blit(self.image, (self.rect.x, self.rect.y))
+	def zobraz(self, surface):
+		surface.blit(self.obrazek, (self.rect.x, self.rect.y))
 
 		font = pygame.font.SysFont("arial", 40)
 
 		text_img = font.render(self.text, True, (0,0,0))
-		text_len = text_img.get_width()
-		text_height = text_img.get_height()
-		surface.blit(text_img, (self.x + int(self.width / 2) - int(text_len / 2), self.y + int(self.height/2) - int(text_height/2)))
+		text_delka = text_img.get_sirka()
+		text_vyska = text_img.get_vyska()
+		surface.blit(text_img, (self.x + int(self.sirka / 2) - int(text_delka / 2), self.y + int(self.vyska/2) - int(text_vyska/2)))
 
 	

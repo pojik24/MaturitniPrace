@@ -286,10 +286,10 @@ class App:
         self._display_surf.blit(img, (int(self.sirka/2 - img.get_width()/2), 80))
 
         #vykreslení tlačítek s odpovědí
-        self.tlacitkoOdpoved0.draw(self._display_surf)   
-        self.tlacitkoOdpoved1.draw(self._display_surf)
-        self.tlacitkoOdpoved2.draw(self._display_surf)
-        self.tlacitkoOdpoved3.draw(self._display_surf)
+        self.tlacitkoOdpoved0.zobraz(self._display_surf)   
+        self.tlacitkoOdpoved1.zobraz(self._display_surf)
+        self.tlacitkoOdpoved2.zobraz(self._display_surf)
+        self.tlacitkoOdpoved3.zobraz(self._display_surf)
 
         #health bary
         img_healthBarH = pygame.transform.scale(self.img_healthBarC, (700/hrac.max_zivoty*hrac.zivoty, 63))
@@ -306,9 +306,9 @@ class App:
         self._display_surf.blit(text2_img, (1400, 791))
 
     def zobraz_menu(self):
-        self.tlacitkoMapa.draw(self._display_surf)
-        self.tlacitkoAdd.draw(self._display_surf)
-        self.tlacitkoQuit.draw(self._display_surf)
+        self.tlacitkoMapa.zobraz(self._display_surf)
+        self.tlacitkoAdd.zobraz(self._display_surf)
+        self.tlacitkoQuit.zobraz(self._display_surf)
 
     def zobraz_mapu(self):
         self._display_surf.blit(self.img_mapa, (int(self.sirka/2 - 300), int(self.vyska/2 - 300)), ((hrac.pozice[0]*200)-400, (hrac.pozice[1]*200)-400, 600, 600))
@@ -360,14 +360,14 @@ class App:
     def zobraz_obchod(self):
         self._display_surf.blit(self.img_obchod, (0,0))
 
-        self.tlacitkoZpet.draw(self._display_surf)
+        self.tlacitkoZpet.zobraz(self._display_surf)
 
         self.img_predmet1 = pygame.transform.scale(self.predmety[0].img, (270,270))
-        self.tlacitkoPredmet1.draw(self._display_surf)
+        self.tlacitkoPredmet1.zobraz(self._display_surf)
         self._display_surf.blit(self.img_predmet1, ((self.sirka/2)-440, 360))
 
         self.img_predmet2 = pygame.transform.scale(self.predmety[1].img, (200,200))
-        self.tlacitkoPredmet2.draw(self._display_surf)
+        self.tlacitkoPredmet2.zobraz(self._display_surf)
         self._display_surf.blit(self.img_predmet2, ((self.sirka/2)+195, 395))
 
         font = pygame.font.SysFont("calibri", 41)
@@ -391,16 +391,16 @@ class App:
         self._display_surf.blit(text_img5, (20, 800))
 
     def zobraz_add(self):
-        self.tlacitkoZpet.draw(self._display_surf)
+        self.tlacitkoZpet.zobraz(self._display_surf)
 
         font = pygame.font.SysFont("calibri", 20)
-        self.tbox_tema.draw(self._display_surf)
-        self.tbox_otazka.draw(self._display_surf)
-        self.tbox_SpravnaO.draw(self._display_surf)
-        self.tbox_SpatnaO1.draw(self._display_surf)
-        self.tbox_SpatnaO2.draw(self._display_surf)
-        self.tbox_SpatnaO3.draw(self._display_surf)
-        self.tlacitkoSubmit.draw(self._display_surf)
+        self.tbox_tema.zobraz(self._display_surf)
+        self.tbox_otazka.zobraz(self._display_surf)
+        self.tbox_SpravnaO.zobraz(self._display_surf)
+        self.tbox_SpatnaO1.zobraz(self._display_surf)
+        self.tbox_SpatnaO2.zobraz(self._display_surf)
+        self.tbox_SpatnaO3.zobraz(self._display_surf)
+        self.tlacitkoSubmit.zobraz(self._display_surf)
         
         
     def game_over(self):
@@ -414,8 +414,8 @@ class App:
         font2 = pygame.font.SysFont("calibri", 60)
         text_img2 = font2.render(f"Konečné skóre: {hrac.score}", True, (0,0,0))
         self._display_surf.blit(text_img2, ((self.sirka/2)-(text_img2.get_width()/2), 450))
-        self.tlacitkoRestart.draw(self._display_surf)
-        self.tlacitkoQuit2.draw(self._display_surf)
+        self.tlacitkoRestart.zobraz(self._display_surf)
+        self.tlacitkoQuit2.zobraz(self._display_surf)
 
 if __name__ == "__main__" :
     hrac = Hrac("Smil Flek z Nohavic", 50, "obrazky/ritíř_1.png", (5,5), 10)
