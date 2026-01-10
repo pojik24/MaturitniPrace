@@ -6,7 +6,7 @@ import random
 import databaze
  
 class Tvor(object):
-    def __init__(self, jmeno, dflt_zivoty, obrazek, utok, gold=0, biom=None):
+    def __init__(self, jmeno, dflt_zivoty, obrazek, utok, gold=0):
         self.jmeno = jmeno
         self.max_zivoty = dflt_zivoty
         self.dflt_zivoty = dflt_zivoty
@@ -14,7 +14,6 @@ class Tvor(object):
         self.img = pygame.image.load(obrazek)
         self.utok = utok
         self.gold = gold
-        self.biom = biom
         
 class Hrac(Tvor):
     def __init__(self, jmeno, zivoty, obrazek, pozice, utok, gold=0):
@@ -55,7 +54,7 @@ class App:
         self.img_quit = pygame.image.load("obrazky/Quit.png").convert_alpha()
         self.img_mapaButt = pygame.image.load("obrazky/Mapa_butt.png").convert_alpha()
         self.img_add = pygame.image.load("obrazky/add.png").convert_alpha()
-        self.img_mapa = pygame.image.load("obrazky/Mapa2.png").convert_alpha()        
+        self.img_mapa = pygame.image.load("obrazky/Mapa.png").convert_alpha()        
         self.img_mapaOverlay = pygame.image.load("obrazky/Mapa_overlay.png").convert_alpha()
         self.img_healthBar = pygame.image.load("obrazky/healthBar.png").convert_alpha()
         self.img_healthBarC = pygame.image.load("obrazky/healthBarC.png").convert_alpha()
@@ -101,9 +100,10 @@ class App:
         self.tlacitkoAdd = button.Button(int(self.sirka/2 - self.sirkaTlacitkaQuit/2), 400, self.img_add)
         self.tlacitkoQuit = button.Button(int(self.sirka/2 - self.sirkaTlacitkaQuit/2), 500, self.img_quit)
 
-        self.tvori = [Tvor("pavouk", 50, "obrazky/potvůrky_2.png", 10, 30, "les"),
-                      Tvor("sirena", 60, "obrazky/potvůrky_3.jpg", 15, 45, "jezero"),
-                      Tvor("ryba", 40, "obrazky/potvůrky_1.jpg", 10, 25, "jezero"),]
+        self.tvori = [Tvor("pavouk", 50, "obrazky/potvůrky_2.png", 15, 30),
+                      Tvor("komár", 20, "obrazky/komarek.png", 20, 20),
+                      Tvor("ryba", 50, "obrazky/potvůrky_1.jpg", 10, 25),
+                      Tvor("netopýr", 55, "obrazky/netoparek.png", 12, 30)]
                     
         
         self.predmety = [Predmet("Lektvar síly", "obrazky/lektvar2.png", 150),
@@ -324,6 +324,12 @@ class App:
             self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "V":
             self.tvor = self.tvori[2]
+            self.priprava_otazky()
+        elif self.mapa[hrac.pozice] == "B":
+            self.tvor = self.tvori[1]
+            self.priprava_otazky()
+        elif self.mapa[hrac.pozice] == "H":
+            self.tvor = self.tvori[3]
             self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "O":
             self.zobrazuj_obchod = True

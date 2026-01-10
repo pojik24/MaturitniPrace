@@ -3,8 +3,8 @@ import pygame
 #button class
 class Button():
 	def __init__(self, x, y, obrazek, text=""):
-		self.sirka = obrazek.get_sirka()
-		self.vyska = obrazek.get_vyska()
+		self.sirka = obrazek.get_width()
+		self.vyska = obrazek.get_height()
 		self.x = x
 		self.y = y
 		self.text = text
@@ -24,15 +24,15 @@ class Button():
 		font = pygame.font.SysFont("arial", 40)
 
 		text_img = font.render(self.text, True, (0,0,0))
-		text_delka = text_img.get_sirka()
-		text_vyska = text_img.get_vyska()
+		text_delka = text_img.get_width()
+		text_vyska = text_img.get_height()
 		surface.blit(text_img, (self.x + int(self.sirka / 2) - int(text_delka / 2), self.y + int(self.vyska/2) - int(text_vyska/2)))
 
 	
 class Textbox():
 	def __init__(self, x, y, obrazek):
-		self.sirka = obrazek.get_sirka()
-		self.vyska = obrazek.get_vyska()
+		self.sirka = obrazek.get_width()
+		self.vyska = obrazek.get_height()
 		self.x = x
 		self.y = y
 		self.obrazek = obrazek
@@ -61,8 +61,7 @@ class Textbox():
 		font = pygame.font.SysFont("arial", 40)
 
 		text_img = font.render(self.text, True, (0,0,0))
-		text_delka = text_img.get_sirka()
-		text_vyska = text_img.get_vyska()
+		text_delka = text_img.get_width()
+		text_vyska = text_img.get_height()
 		surface.blit(text_img, (self.x + int(self.sirka / 2) - int(text_delka / 2), self.y + int(self.vyska/2) - int(text_vyska/2)))
-
-	
+		
