@@ -15,13 +15,17 @@ class Tvor(object):
         self.utok = utok
         self.gold = gold
         
-class Hrac(Tvor):
-    def __init__(self, jmeno, zivoty, obrazek, pozice, utok, gold=0):
-        super().__init__(jmeno, zivoty, obrazek, utok, gold)
+class Hrac(object):
+    def __init__(self, zivoty, obrazek, pozice, utok):
+        self.zivoty = zivoty
+        self.max_zivoty = zivoty
+        self.dflt_zivoty = zivoty
         self.img = pygame.image.load(obrazek)
         self.pozice = pozice
         self.score = 0
+        self.utok = utok
         self.pocatecni_utok = utok
+        self.gold = 0
 
 class Predmet(object):
     def __init__(self, nazev, obrazek, cena):
@@ -38,13 +42,9 @@ class Predmet(object):
 
 class App:
     def __init__(self):
-        self._running = True
-        self._display_surf = None
-        
-    def on_init(self):
         pygame.init()
-        self._display_surf = pygame.display.set_mode((0,0), pygame.HWSURFACE | pygame.DOUBLEBUF, pygame.FULLSCREEN)
         self._running = True
+        self._display_surf = pygame.display.set_mode((0,0), pygame.HWSURFACE | pygame.DOUBLEBUF, pygame.FULLSCREEN)
         self.sirka, self.vyska = self._display_surf.get_size()
 
         self.db = databaze.Db_otazek()
@@ -85,7 +85,7 @@ class App:
         self.tbox_SpatnaO1 = button.Textbox(50, 500, self.img_addtema)
         self.tbox_SpatnaO2 = button.Textbox(50, 600, self.img_addtema)
         self.tbox_SpatnaO3 = button.Textbox(50, 700, self.img_addtema)
-        self.tlacitkoSubmit = button.Button(1200, 700, self.img_button_m, "Submit")
+        self.tlacitkoSubmit = button.Button(1200, 700, self.img_add)
 
         #talacitka pro obchod
         self.tlacitkoPredmet1 = button.Button((self.sirka/2)-455, 345, self.img_predmetButton)
@@ -236,40 +236,26 @@ class App:
 
     def on_render(self):
         if self.zobrazuj_otazku:
-            self.zobraz_otazku()
-                
+            self.zobraz_otazku()                
         elif self.zobrazuj_menu:
             self.zobraz_menu()
-
         elif self.zobrazuj_mapu:
-            self.zobraz_mapu()
-        
+            self.zobraz_mapu()        
         elif self.zobrazuj_obchod:
             self.zobraz_obchod()
-
         elif self.zobrazuj_add:
             self.zobraz_add()
-
         elif self.zobrazuj_game_over:
-            self.game_over()
-                               
+            self.game_over()                               
         pygame.display.flip()
 
-    def on_cleanup(self):
-        pygame.quit()
- 
-    def on_execute(self):
-        if self.on_init() == False:
-            self._running = False
-       
-        while( self._running ):
+    def on_execute(self):    
+        while self._running:
             self._display_surf.fill((255,255,255))
-
             for event in pygame.event.get():
                 self.on_event(event)
             self.on_render()
-        
-        self.on_cleanup()
+        pygame.quit()
 
     def zobraz_otazku(self):
         #vykreslení hráče
@@ -312,21 +298,20 @@ class App:
 
     def zobraz_mapu(self):
         self._display_surf.blit(self.img_mapa, (int(self.sirka/2 - 300), int(self.vyska/2 - 300)), ((hrac.pozice[0]*200)-400, (hrac.pozice[1]*200)-400, 600, 600))
-        self._display_surf.blit(self.img_mapaOverlay, (int(self.sirka/2 - 50), int(self.vyska/2 - 50)))
+        self._display_surf.blit(self.img_mapaOverlay, (int(self.sirka/2 - 100), int(self.vyska/2 - 100)))
         font = pygame.font.SysFont("calibri", 41)
         text_img1 = font.render("Pro pohyb použij W,A,S,D", True, (0,0,0))
         self._display_surf.blit(text_img1, (20, 800))
-
 
     def mapa_update(self):
         if self.mapa[hrac.pozice] == "L":
             self.tvor = self.tvori[0]
             self.priprava_otazky()
-        elif self.mapa[hrac.pozice] == "V":
-            self.tvor = self.tvori[2]
-            self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "B":
             self.tvor = self.tvori[1]
+            self.priprava_otazky()
+        elif self.mapa[hrac.pozice] == "V":
+            self.tvor = self.tvori[2]
             self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "H":
             self.tvor = self.tvori[3]
@@ -399,15 +384,26 @@ class App:
     def zobraz_add(self):
         self.tlacitkoZpet.zobraz(self._display_surf)
 
-        font = pygame.font.SysFont("calibri", 20)
+        font = pygame.font.SysFont("calibri", 30)
+        text1 = font.render("Téma:", True, (0,0,0))
+        self._display_surf.blit(text1, (60, 170))
         self.tbox_tema.zobraz(self._display_surf)
+        text2 = font.render("Otázka:", True, (0,0,0))
+        self._display_surf.blit(text2, (60, 270))
         self.tbox_otazka.zobraz(self._display_surf)
+        text3 = font.render("Správná odpověď:", True, (0,0,0))
+        self._display_surf.blit(text3, (60, 370))
         self.tbox_SpravnaO.zobraz(self._display_surf)
+        text4 = font.render("Špatná odpověď 1:", True, (0,0,0))
+        self._display_surf.blit(text4, (60, 470))
         self.tbox_SpatnaO1.zobraz(self._display_surf)
+        text5 = font.render("Špatná odpověď 2:", True, (0,0,0))
+        self._display_surf.blit(text5, (60, 570))
         self.tbox_SpatnaO2.zobraz(self._display_surf)
+        text6 = font.render("Špatná odpověď 3:", True, (0,0,0))
+        self._display_surf.blit(text6, (60, 670))
         self.tbox_SpatnaO3.zobraz(self._display_surf)
         self.tlacitkoSubmit.zobraz(self._display_surf)
-        
         
     def game_over(self):
         self.zobrazuj_mapu = False
@@ -424,6 +420,6 @@ class App:
         self.tlacitkoQuit2.zobraz(self._display_surf)
 
 if __name__ == "__main__" :
-    hrac = Hrac("Smil Flek z Nohavic", 50, "obrazky/ritíř_1.png", (5,5), 10)
+    hrac = Hrac(50, "obrazky/ritíř_1.png", (5,3), 10)
     theApp = App()
     theApp.on_execute()
