@@ -36,4 +36,24 @@ class Db_otazek(object):
         self.connection.commit()
         pocet = vysledek.fetchone()
         return pocet[0]
+    
+    def tema(self, tema):
+        query = "SELECT id FROM otazky WHERE tema = ?;"
+        vysledek = self.cursor.execute(query, [tema])
+        self.connection.commit()
+        ids = vysledek.fetchall()
+        otazky = []
+        for i in ids:
+            otazky.append(i[0])
+        return otazky
+
+    def vsechna_temata(self):
+        query = "SELECT DISTINCT tema FROM otazky;"
+        vysledek = self.cursor.execute(query)
+        self.connection.commit()
+        temata = vysledek.fetchall()
+        n_temata = []
+        for i in temata:
+            n_temata.append(i[0])
+        return n_temata
 

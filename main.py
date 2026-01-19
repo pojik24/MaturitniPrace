@@ -6,13 +6,14 @@ import random
 import databaze
  
 class Tvor(object):
-    def __init__(self, jmeno, dflt_zivoty, obrazek, utok, gold=0):
+    def __init__(self, jmeno, dflt_zivoty, obrazek, utok, gold=0, otazky=[]):
         self.jmeno = jmeno
         self.max_zivoty = dflt_zivoty
         self.dflt_zivoty = dflt_zivoty
         self.zivoty = dflt_zivoty
         self.img = pygame.image.load(obrazek)
         self.utok = utok
+        self.otazky = otazky
         self.gold = gold
         
 class Hrac(object):
@@ -104,7 +105,10 @@ class App:
                       Tvor("komár", 20, "obrazky/komarek.png", 20, 20),
                       Tvor("ryba", 50, "obrazky/potvůrky_1.jpg", 10, 25),
                       Tvor("netopýr", 55, "obrazky/netoparek.png", 12, 30)]
-                    
+        
+        vsechna_temata = self.db.vsechna_temata()
+        for i in range(len(vsechna_temata)):
+            self.tvori[i%len(self.tvori)].otazky = self.tvori[i%len(self.tvori)].otazky + self.db.tema(vsechna_temata[i]) 
         
         self.predmety = [Predmet("Lektvar síly", "obrazky/lektvar2.png", 150),
                          Predmet("Lektvar zdraví", "obrazky/lektvar1.png", 100)]
@@ -278,18 +282,20 @@ class App:
         self.tlacitkoOdpoved3.zobraz(self._display_surf)
 
         #health bary
-        img_healthBarH = pygame.transform.scale(self.img_healthBarC, (700/hrac.max_zivoty*hrac.zivoty, 63))
-        self._display_surf.blit(img_healthBarH, (25,780))
-        self._display_surf.blit(self.img_healthBar, (20,775))
-        img_healthBarT = pygame.transform.scale(self.img_healthBarC, (700/self.tvor.max_zivoty*self.tvor.zivoty, 63))
-        self._display_surf.blit(img_healthBarT, (810,780))
-        self._display_surf.blit(self.img_healthBar, (805,775))
+        pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(25, 810, 700/hrac.max_zivoty*hrac.zivoty, 33))
+        #img_healthBarH = pygame.transform.scale(self.img_healthBarC, (700/hrac.max_zivoty*hrac.zivoty, 63))
+        #self._display_surf.blit(img_healthBarH, (25,780))
+        ##self._display_surf.blit(self.img_healthBar, (20,775))
+        pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(810, 810, 700/hrac.max_zivoty*hrac.zivoty, 33))
+        #img_healthBarT = pygame.transform.scale(self.img_healthBarC, (700/self.tvor.max_zivoty*self.tvor.zivoty, 63))
+        #self._display_surf.blit(img_healthBarT, (810,780))
+        ##self._display_surf.blit(self.img_healthBar, (805,775))
 
-        zfont = pygame.font.SysFont("calibri", 41)
-        text_img = zfont.render(f"{hrac.zivoty}/{hrac.max_zivoty}", True, (0,0,0))
-        text2_img = zfont.render(f"{self.tvor.zivoty}/{self.tvor.max_zivoty}", True, (0,0,0))
-        self._display_surf.blit(text_img, (36, 791))
-        self._display_surf.blit(text2_img, (1400, 791))
+        #zfont = pygame.font.SysFont("calibri", 41)
+        #text_img = zfont.render(f"{hrac.zivoty}/{hrac.max_zivoty}", True, (0,0,0))
+        #text2_img = zfont.render(f"{self.tvor.zivoty}/{self.tvor.max_zivoty}", True, (0,0,0))
+        #self._display_surf.blit(text_img, (36, 791))
+        #self._display_surf.blit(text2_img, (1400, 791))
 
     def zobraz_menu(self):
         self.tlacitkoMapa.zobraz(self._display_surf)
@@ -331,7 +337,7 @@ class App:
         self.zobrazuj_otazku = True
 
     def vyber_otazky(self):
-        self.otazka = otazky.Otazka(random.randint(1, self.db.pocet_otazek()))
+        self.otazka = otazky.Otazka(random.choice(self.tvor.otazky))
         random.shuffle(self.otazka.vsechnyOdpovedi)
         self.tlacitkoOdpoved0 = button.Button(int(self.sirka/2 - self.sirkaTlacitkaOdpovedi/2), 220, self.img_tlacitkoOdpoved, str(self.otazka.vsechnyOdpovedi[0]))
         self.tlacitkoOdpoved1 = button.Button(int(self.sirka/2 - self.sirkaTlacitkaOdpovedi/2), 360, self.img_tlacitkoOdpoved, str(self.otazka.vsechnyOdpovedi[1]))
