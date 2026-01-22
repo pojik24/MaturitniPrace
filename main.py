@@ -37,9 +37,9 @@ class Predmet(object):
     def pouzit(self):
         if self.nazev == "Lektvar síly":
             hrac.utok = hrac.utok + 5
-        elif self.nazev == "Lektvar života":
-            hrac.zivoty = hrac.max_zivoty
+        elif self.nazev == "Lektvar zdraví":
             hrac.max_zivoty = hrac.max_zivoty + 20
+            hrac.zivoty = hrac.max_zivoty
 
 class App:
     def __init__(self):
@@ -65,6 +65,7 @@ class App:
         self.img_addotazka = pygame.image.load("obrazky/add_otazka.png").convert_alpha()
         self.img_addtema = pygame.image.load("obrazky/add_tema.png").convert_alpha()
         self.img_button_m = pygame.image.load("obrazky/tlacitko_mensi.png").convert_alpha()
+        self.img_srdce = pygame.image.load("obrazky/srdce.png").convert_alpha()
         self.img_obchod = pygame.image.load("obrazky/obchod.png").convert_alpha()
         self.img_obchod = pygame.transform.scale(self.img_obchod, (self.sirka, self.vyska))
 
@@ -102,9 +103,10 @@ class App:
         self.tlacitkoQuit = button.Button(int(self.sirka/2 - self.sirkaTlacitkaQuit/2), 500, self.img_quit)
 
         self.tvori = [Tvor("pavouk", 50, "obrazky/potvůrky_2.png", 15, 30),
-                      Tvor("komár", 20, "obrazky/komarek.png", 20, 20),
                       Tvor("ryba", 50, "obrazky/potvůrky_1.jpg", 10, 25),
-                      Tvor("netopýr", 55, "obrazky/netoparek.png", 12, 30)]
+                      Tvor("komár", 20, "obrazky/komarek.png", 20, 20),
+                      Tvor("netopýr", 55, "obrazky/netoparek.png", 12, 30),
+                      Tvor("koza", 60, "obrazky/koza_1.jpg", 10, 35)]
         
         vsechna_temata = self.db.vsechna_temata()
         for i in range(len(vsechna_temata)):
@@ -117,8 +119,8 @@ class App:
                      (1,2):"L", (2,2):"L", (3,2):"V", (4,2):"V", (5,2):"O", (6,2):"L", (7,2):"J", (8,2):"C", (9,2):"L", (10,2):"L",
                      (1,3):"V", (2,3):"V", (3,3):"V", (4,3):"V", (5,3):"C", (6,3):"L", (7,3):"L", (8,3):"C", (9,3):"L", (10,3):"H",
                      (1,4):"J", (2,4):"C", (3,4):"C", (4,4):"C", (5,4):"C", (6,4):"C", (7,4):"C", (8,4):"C", (9,4):"H", (10,4):"H",
-                     (1,5):"B", (2,5):"B", (3,5):"C", (4,5):"B", (5,5):"B", (6,5):"C", (7,5):"C", (8,5):"H", (9,5):"H", (10,5):"H",
-                     (1,6):"L", (2,6):"B", (3,6):"C", (4,6):"B", (5,6):"J", (6,6):"V", (7,6):"C", (8,6):"H", (9,6):"H", (10,6):"H",
+                     (1,5):"B", (2,5):"V", (3,5):"C", (4,5):"B", (5,5):"J", (6,5):"C", (7,5):"C", (8,5):"H", (9,5):"H", (10,5):"H",
+                     (1,6):"B", (2,6):"B", (3,6):"C", (4,6):"B", (5,6):"B", (6,6):"V", (7,6):"C", (8,6):"H", (9,6):"H", (10,6):"H",
                      (1,7):"L", (2,7):"L", (3,7):"C", (4,7):"L", (5,7):"L", (6,7):"L", (7,7):"L", (8,7):"V", (9,7):"J", (10,7):"H",
                      (1,8):"V", (2,8):"V", (3,8):"L", (4,8):"L", (5,8):"J", (6,8):"L", (7,8):"V", (8,8):"V", (9,8):"V", (10,8):"H",
                      (1,9):"V", (2,9):"V", (3,9):"L", (4,9):"L", (5,9):"H", (6,9):"H", (7,9):"V", (8,9):"V", (9,9):"H", (10,9):"H",
@@ -165,10 +167,11 @@ class App:
                 self._running = False
             
             elif self.tlacitkoRestart.handle_event(event):
+                self.max_zivoty = hrac.dflt_zivoty
                 hrac.zivoty = hrac.dflt_zivoty
                 hrac.gold = 0
                 hrac.score = 0
-                hrac.pozice = (5,5)
+                hrac.pozice = (5,3)
                 hrac.utok = hrac.pocatecni_utok
                 self.zobrazuj_mapu = True
                 self.zobrazuj_game_over = False
@@ -282,20 +285,16 @@ class App:
         self.tlacitkoOdpoved3.zobraz(self._display_surf)
 
         #health bary
-        pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(25, 810, 700/hrac.max_zivoty*hrac.zivoty, 33))
-        #img_healthBarH = pygame.transform.scale(self.img_healthBarC, (700/hrac.max_zivoty*hrac.zivoty, 63))
-        #self._display_surf.blit(img_healthBarH, (25,780))
-        ##self._display_surf.blit(self.img_healthBar, (20,775))
-        pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(810, 810, 700/hrac.max_zivoty*hrac.zivoty, 33))
-        #img_healthBarT = pygame.transform.scale(self.img_healthBarC, (700/self.tvor.max_zivoty*self.tvor.zivoty, 63))
-        #self._display_surf.blit(img_healthBarT, (810,780))
-        ##self._display_surf.blit(self.img_healthBar, (805,775))
+        pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(25+(700-700/hrac.max_zivoty*hrac.zivoty), 790, 700/hrac.max_zivoty*hrac.zivoty, 20))
+        pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(810, 790, 700/self.tvor.max_zivoty*self.tvor.zivoty, 20))
+        self._display_surf.blit(self.img_srdce, (self.sirka/2-50,760))
 
-        #zfont = pygame.font.SysFont("calibri", 41)
-        #text_img = zfont.render(f"{hrac.zivoty}/{hrac.max_zivoty}", True, (0,0,0))
-        #text2_img = zfont.render(f"{self.tvor.zivoty}/{self.tvor.max_zivoty}", True, (0,0,0))
-        #self._display_surf.blit(text_img, (36, 791))
-        #self._display_surf.blit(text2_img, (1400, 791))
+        zfont = pygame.font.SysFont("calibri", 40)
+        text_img = zfont.render(f"{hrac.zivoty}/{hrac.max_zivoty}", True, (0,0,0))
+        text2_img = zfont.render(f"{self.tvor.zivoty}/{self.tvor.max_zivoty}", True, (0,0,0))
+        text1_s = text_img.get_width()
+        self._display_surf.blit(text_img, (self.sirka/2-55-text1_s, 815))
+        self._display_surf.blit(text2_img, (self.sirka/2+55, 815))
 
     def zobraz_menu(self):
         self.tlacitkoMapa.zobraz(self._display_surf)
@@ -313,14 +312,17 @@ class App:
         if self.mapa[hrac.pozice] == "L":
             self.tvor = self.tvori[0]
             self.priprava_otazky()
-        elif self.mapa[hrac.pozice] == "B":
+        elif self.mapa[hrac.pozice] == "V":
             self.tvor = self.tvori[1]
             self.priprava_otazky()
-        elif self.mapa[hrac.pozice] == "V":
+        elif self.mapa[hrac.pozice] == "B":
             self.tvor = self.tvori[2]
             self.priprava_otazky()
-        elif self.mapa[hrac.pozice] == "H":
+        elif self.mapa[hrac.pozice] == "J":
             self.tvor = self.tvori[3]
+            self.priprava_otazky()
+        elif self.mapa[hrac.pozice] == "H":
+            self.tvor = self.tvori[4]
             self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "O":
             self.zobrazuj_obchod = True
@@ -367,12 +369,12 @@ class App:
         self.tlacitkoPredmet2.zobraz(self._display_surf)
         self._display_surf.blit(self.img_predmet2, ((self.sirka/2)+195, 395))
 
-        font = pygame.font.SysFont("calibri", 41)
+        font = pygame.font.SysFont("arial", 41)
         text_img1 = font.render(f"{self.predmety[0].nazev}", True, (0,0,0))
         sirka1 = text_img1.get_width()
         self._display_surf.blit(text_img1, (int((self.sirka/2)-310-(sirka1/2)), 660))
 
-        text_img3 = font.render(f"{self.predmety[0].cena}g", True, (0,0,0))
+        text_img3 = font.render(f"{self.predmety[0].cena}zl", True, (0,0,0))
         sirka3 = text_img3.get_width()
         self._display_surf.blit(text_img3, (int((self.sirka/2)-310-(sirka3/2)), 700))
 
@@ -380,11 +382,11 @@ class App:
         sirka2 = text_img2.get_width()
         self._display_surf.blit(text_img2, (int((self.sirka/2)+310-(sirka2/2)), 660))
 
-        text_img4 = font.render(f"{self.predmety[1].cena}g", True, (0,0,0))
+        text_img4 = font.render(f"{self.predmety[1].cena}zl", True, (0,0,0))
         sirka4 = text_img4.get_width()
         self._display_surf.blit(text_img4, (int((self.sirka/2)+310-(sirka4/2)), 700))
 
-        text_img5 = font.render(f"Tvoje goldy: {hrac.gold}", True, (0,0,0))
+        text_img5 = font.render(f"Tvoje zlaťáky: {hrac.gold}", True, (0,0,0))
         self._display_surf.blit(text_img5, (20, 800))
 
     def zobraz_add(self):
