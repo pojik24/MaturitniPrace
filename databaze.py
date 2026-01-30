@@ -56,4 +56,3 @@ class Db_otazek(object):
         for i in temata:
             n_temata.append(i[0])
         return n_temata
-

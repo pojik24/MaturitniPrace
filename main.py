@@ -58,7 +58,6 @@ class App:
         self.img_mapa = pygame.image.load("obrazky/Mapa.png").convert_alpha()        
         self.img_mapaOverlay = pygame.image.load("obrazky/Mapa_overlay.png").convert_alpha()
         self.img_healthBar = pygame.image.load("obrazky/healthBar.png").convert_alpha()
-        self.img_healthBarC = pygame.image.load("obrazky/healthBarC.png").convert_alpha()
         self.img_GameOver = pygame.image.load("obrazky/Game_over.png").convert_alpha()
         self.img_predmetButton = pygame.image.load("obrazky/predmetButton.png").convert_alpha()
         self.img_zpet = pygame.image.load("obrazky/zpet.png").convert_alpha()
@@ -103,10 +102,10 @@ class App:
         self.tlacitkoQuit = button.Button(int(self.sirka/2 - self.sirkaTlacitkaQuit/2), 500, self.img_quit)
 
         self.tvori = [Tvor("pavouk", 50, "obrazky/potvůrky_2.png", 15, 30),
-                      Tvor("ryba", 50, "obrazky/potvůrky_1.jpg", 10, 25),
+                      Tvor("koza", 60, "obrazky/koza_1.jpg", 10, 35),
                       Tvor("komár", 20, "obrazky/komarek.png", 20, 20),
                       Tvor("netopýr", 55, "obrazky/netoparek.png", 12, 30),
-                      Tvor("koza", 60, "obrazky/koza_1.jpg", 10, 35)]
+                      Tvor("ryba", 50, "obrazky/potvůrky_1.jpg", 10, 25),]
         
         vsechna_temata = self.db.vsechna_temata()
         for i in range(len(vsechna_temata)):
@@ -312,7 +311,7 @@ class App:
         if self.mapa[hrac.pozice] == "L":
             self.tvor = self.tvori[0]
             self.priprava_otazky()
-        elif self.mapa[hrac.pozice] == "V":
+        elif self.mapa[hrac.pozice] == "H":
             self.tvor = self.tvori[1]
             self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "B":
@@ -321,7 +320,7 @@ class App:
         elif self.mapa[hrac.pozice] == "J":
             self.tvor = self.tvori[3]
             self.priprava_otazky()
-        elif self.mapa[hrac.pozice] == "H":
+        elif self.mapa[hrac.pozice] == "V":
             self.tvor = self.tvori[4]
             self.priprava_otazky()
         elif self.mapa[hrac.pozice] == "O":
