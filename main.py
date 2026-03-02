@@ -1,3 +1,6 @@
+#main.py
+#autor: Sára Jirkalová <jirkalovas@jirovcovka.net>
+
 import pygame
 from pygame.locals import *
 import button
@@ -6,7 +9,22 @@ import random
 import databaze
  
 class Tvor(object):
+    """
+    Třída Tvor reprezentuje nepřátelskou bytost ve hře.
+    Obsahuje statistiky tvora, obrázek, útok a otázky,
+    které se k němu mohou vztahovat.
+    """
     def __init__(self, jmeno, dflt_zivoty, obrazek, utok, gold=0, otazky=[]):
+        """
+        Konstruktor třídy Tvor.
+
+        :param jmeno: jméno tvora
+        :param dflt_zivoty: výchozí počet životů
+        :param obrazek: cesta k obrázku
+        :param utok: síla útoku
+        :param gold: množství zlata po poražení
+        :param otazky: seznam ID otázek
+        """
         self.jmeno = jmeno
         self.max_zivoty = dflt_zivoty
         self.dflt_zivoty = dflt_zivoty
@@ -17,7 +35,19 @@ class Tvor(object):
         self.gold = gold
         
 class Hrac(object):
+    """
+    Třída Hrac reprezentuje hráče.
+    Uchovává informace o životě, útoku, skóre, pozici a zlatě.
+    """
     def __init__(self, zivoty, obrazek, pozice, utok):
+        """
+        Konstruktor třídy Hrac.
+
+        :param zivoty: počáteční životy hráče
+        :param obrazek: cesta k obrázku hráče
+        :param pozice: pozice na mapě (x, y)
+        :param utok: síla útoku
+        """
         self.zivoty = zivoty
         self.max_zivoty = zivoty
         self.dflt_zivoty = zivoty
@@ -29,12 +59,26 @@ class Hrac(object):
         self.gold = 0
 
 class Predmet(object):
+    """
+    Třída Predmet reprezentuje předmět v obchodě.
+    """
     def __init__(self, nazev, obrazek, cena):
+        
+        """
+        Konstruktor třídy Predmet.
+
+        :param nazev: název předmětu
+        :param obrazek: cesta k obrázku
+        :param cena: cena předmětu
+        """
         self.nazev = nazev
         self.img = pygame.image.load(obrazek)
         self.cena = cena
 
     def pouzit(self):
+        """
+        Použije předmět na hráče.
+        """
         if self.nazev == "Lektvar síly":
             hrac.utok = hrac.utok + 5
         elif self.nazev == "Lektvar zdraví":
@@ -42,22 +86,29 @@ class Predmet(object):
             hrac.zivoty = hrac.max_zivoty
 
 class App:
+    """
+    Hlavní třída aplikace.
+    Řídí herní smyčku, události, vykreslování a logiku hry.
+    """
     def __init__(self):
+        """
+        Inicializace pygame, obrazovky, databáze, obrázků a herních stavů.
+        """
         pygame.init()
         self._running = True
         self._display_surf = pygame.display.set_mode((0,0), pygame.HWSURFACE | pygame.DOUBLEBUF, pygame.FULLSCREEN)
         self.sirka, self.vyska = self._display_surf.get_size()
-
+        
+        # Připojení k databázi otázek
         self.db = databaze.Db_otazek()
         
-        #načtení obrázků
-        self.img_tlacitkoOdpoved = pygame.image.load("obrazky/TlacitkoV3.png").convert_alpha()
+        # Načtení obrázků
+        self.img_tlacitkoOdpoved = pygame.image.load("obrazky/Tlacitko.png").convert_alpha()
         self.img_quit = pygame.image.load("obrazky/Quit.png").convert_alpha()
         self.img_mapaButt = pygame.image.load("obrazky/Mapa_butt.png").convert_alpha()
         self.img_add = pygame.image.load("obrazky/add.png").convert_alpha()
         self.img_mapa = pygame.image.load("obrazky/Mapa.png").convert_alpha()        
         self.img_mapaOverlay = pygame.image.load("obrazky/Mapa_overlay.png").convert_alpha()
-        self.img_healthBar = pygame.image.load("obrazky/healthBar.png").convert_alpha()
         self.img_GameOver = pygame.image.load("obrazky/Game_over.png").convert_alpha()
         self.img_predmetButton = pygame.image.load("obrazky/predmetButton.png").convert_alpha()
         self.img_zpet = pygame.image.load("obrazky/zpet.png").convert_alpha()
@@ -71,6 +122,7 @@ class App:
         self.sirkaTlacitkaOdpovedi = self.img_tlacitkoOdpoved.get_width()
         self.sirkaTlacitkaQuit = self.img_quit.get_width()
 
+        # Stavy aplikace
         self.zobrazuj_otazku = False
         self.zobrazuj_mapu = False
         self.zobrazuj_menu = True
@@ -78,7 +130,7 @@ class App:
         self.zobrazuj_obchod = False
         self.zobrazuj_add = False
 
-        #tlacitka a tboxy pro přidání otázky
+        #tlačitka a textboxy pro přidání otázky
         self.tlacitkoZpet = button.Button(20,20,self.img_zpet)
         self.tbox_tema = button.Textbox(50, 200, self.img_addtema)
         self.tbox_otazka = button.Textbox(50, 300, self.img_addotazka)
@@ -101,11 +153,11 @@ class App:
         self.tlacitkoAdd = button.Button(int(self.sirka/2 - self.sirkaTlacitkaQuit/2), 400, self.img_add)
         self.tlacitkoQuit = button.Button(int(self.sirka/2 - self.sirkaTlacitkaQuit/2), 500, self.img_quit)
 
-        self.tvori = [Tvor("pavouk", 50, "obrazky/potvůrky_2.png", 15, 30),
-                      Tvor("koza", 60, "obrazky/koza_1.jpg", 10, 35),
-                      Tvor("komár", 20, "obrazky/komarek.png", 20, 20),
-                      Tvor("netopýr", 55, "obrazky/netoparek.png", 12, 30),
-                      Tvor("ryba", 50, "obrazky/potvůrky_1.jpg", 10, 25),]
+        self.tvori = [Tvor("pavouk", 50, "obrazky/pavouk.png", 15, 30),
+                      Tvor("koza", 60, "obrazky/koza.jpg", 10, 35),
+                      Tvor("komár", 20, "obrazky/komar.png", 20, 20),
+                      Tvor("netopýr", 55, "obrazky/netopyr.png", 12, 30),
+                      Tvor("ryba", 50, "obrazky/ryba.jpg", 10, 25),]
         
         vsechna_temata = self.db.vsechna_temata()
         for i in range(len(vsechna_temata)):
@@ -113,7 +165,7 @@ class App:
         
         self.predmety = [Predmet("Lektvar síly", "obrazky/lektvar2.png", 150),
                          Predmet("Lektvar zdraví", "obrazky/lektvar1.png", 100)]
-        
+        #definice mapy
         self.mapa = {(1,1):"L", (2,1):"L", (3,1):"L", (4,1):"V", (5,1):"V", (6,1):"L", (7,1):"L", (8,1):"L", (9,1):"L", (10,1):"L",
                      (1,2):"L", (2,2):"L", (3,2):"V", (4,2):"V", (5,2):"O", (6,2):"L", (7,2):"J", (8,2):"C", (9,2):"L", (10,2):"L",
                      (1,3):"V", (2,3):"V", (3,3):"V", (4,3):"V", (5,3):"C", (6,3):"L", (7,3):"L", (8,3):"C", (9,3):"L", (10,3):"H",
@@ -126,14 +178,22 @@ class App:
                      (1,10):"V",(2,10):"L",(3,10):"J",(4,10):"H",(5,10):"H",(6,10):"H",(7,10):"H",(8,10):"H",(9,10):"H",(10,10):"H",}
  
     def on_event(self, event):
+        
+        """
+        Zpracovává všechny vstupní události (klávesnice, myš).
+        Podle aktuálního stavu hry reaguje na vstupy hráče.
+        """
+        
+        # Ukončení aplikace
         if event.type == pygame.QUIT:
             self._running = False
 
         if event.type == pygame.KEYDOWN:
+            # Ukončení klávesou ESC
             if event.key == pygame.K_ESCAPE:
                 self._running = False
 
-            #handler eventů mapy
+            # Ovládání pohybu po mapě pomocí WASD
             if event.key == pygame.K_w and self.zobrazuj_mapu and hrac.pozice[1]>1:
                 hrac.pozice = (hrac.pozice[0],hrac.pozice[1]-1)
                 self.mapa_update()
@@ -147,7 +207,7 @@ class App:
                 hrac.pozice = (hrac.pozice[0]+1,hrac.pozice[1])
                 self.mapa_update()
 
-        #handler eventů main menu
+        # Ovládání hlavního menu
         if self.zobrazuj_menu:
             if self.tlacitkoQuit.handle_event(event):
                 self._running = False
@@ -160,12 +220,13 @@ class App:
                 self.zobrazuj_menu = False
                 self.zobrazuj_add = True
 
-        #handler eventů game over menu
+        # Ovládání obrazovky Game Over
         if self.zobrazuj_game_over:
             if self.tlacitkoQuit2.handle_event(event):
                 self._running = False
             
             elif self.tlacitkoRestart.handle_event(event):
+                # Reset hráče
                 self.max_zivoty = hrac.dflt_zivoty
                 hrac.zivoty = hrac.dflt_zivoty
                 hrac.gold = 0
@@ -175,7 +236,7 @@ class App:
                 self.zobrazuj_mapu = True
                 self.zobrazuj_game_over = False
 
-        #handler eventů souboje/otázky
+        # Ovládání odpovědí během souboje
         if self.zobrazuj_otazku:
             if self.tlacitkoOdpoved0.handle_event(event) and str(self.otazka.vsechnyOdpovedi[0]) == str(self.otazka.spravnaOdpoved):
                 if self.souboj(hrac, self.tvor):
@@ -213,7 +274,7 @@ class App:
                     self.zobrazuj_game_over = True
                     self.zobrazuj_mapu = False
 
-        #handler eventů obchodu
+        # Ovládání obchodu
         if self.zobrazuj_obchod:
             if self.tlacitkoPredmet1.handle_event(event) and self.predmety[0].cena <= hrac.gold:
                 self.predmety[0].pouzit()
@@ -225,22 +286,28 @@ class App:
                 self.zobrazuj_obchod = False
                 self.zobrazuj_mapu = True
 
-        #handler eventů menu na přidání otázky
+        # Menu pro přidání nové otázky do databáze
         if self.zobrazuj_add:
             if self.tlacitkoZpet.handle_event(event):
                 self.zobrazuj_add = False
                 self.zobrazuj_menu = True
+            # Zpracování textových polí
             self.tbox_tema.handle_event(event)
             self.tbox_otazka.handle_event(event)
             self.tbox_SpravnaO.handle_event(event)
             self.tbox_SpatnaO1.handle_event(event)
             self.tbox_SpatnaO2.handle_event(event)
             self.tbox_SpatnaO3.handle_event(event)
+            # Odeslání otázky do databáze
             if self.tlacitkoSubmit.handle_event(event):
                 self.db.pridejOtazku(self.tbox_tema.text, self.tbox_otazka.text, self.tbox_SpravnaO.text, self.tbox_SpatnaO1.text, self.tbox_SpatnaO2.text, self.tbox_SpatnaO3.text)
+                # Vymazání textových polí
                 self.tbox_tema.text = self.tbox_otazka.text = self.tbox_SpravnaO.text = self.tbox_SpatnaO1.text = self.tbox_SpatnaO2.text = self.tbox_SpatnaO3.text = ""
 
     def on_render(self):
+        """
+        Vybírá, která obrazovka se zobrazuje.
+        """
         if self.zobrazuj_otazku:
             self.zobraz_otazku()                
         elif self.zobrazuj_menu:
@@ -255,7 +322,10 @@ class App:
             self.game_over()                               
         pygame.display.flip()
 
-    def on_execute(self):    
+    def on_execute(self): 
+        """
+        Hlavní herní smyčka aplikace.
+        """   
         while self._running:
             self._display_surf.fill((255,255,255))
             for event in pygame.event.get():
@@ -264,6 +334,9 @@ class App:
         pygame.quit()
 
     def zobraz_otazku(self):
+        """
+        Vykreslení obrazovky s otázkou.
+        """
         #vykreslení hráče
         self.img_hrac = pygame.transform.scale(hrac.img, (496, 1000))
         self._display_surf.blit(self.img_hrac, (0, 50))
@@ -283,7 +356,7 @@ class App:
         self.tlacitkoOdpoved2.zobraz(self._display_surf)
         self.tlacitkoOdpoved3.zobraz(self._display_surf)
 
-        #health bary
+        #vykreslení ukazatelů zdraví
         pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(25+(700-700/hrac.max_zivoty*hrac.zivoty), 790, 700/hrac.max_zivoty*hrac.zivoty, 20))
         pygame.draw.rect(self._display_surf, (0,0,0), pygame.Rect(810, 790, 700/self.tvor.max_zivoty*self.tvor.zivoty, 20))
         self._display_surf.blit(self.img_srdce, (self.sirka/2-50,760))
@@ -296,11 +369,17 @@ class App:
         self._display_surf.blit(text2_img, (self.sirka/2+55, 815))
 
     def zobraz_menu(self):
+        """
+        Vykreslení obrazovky s hlavním menu.
+        """
         self.tlacitkoMapa.zobraz(self._display_surf)
         self.tlacitkoAdd.zobraz(self._display_surf)
         self.tlacitkoQuit.zobraz(self._display_surf)
 
     def zobraz_mapu(self):
+        """
+        Vykreslení obrazovky s mapou
+        """
         self._display_surf.blit(self.img_mapa, (int(self.sirka/2 - 300), int(self.vyska/2 - 300)), ((hrac.pozice[0]*200)-400, (hrac.pozice[1]*200)-400, 600, 600))
         self._display_surf.blit(self.img_mapaOverlay, (int(self.sirka/2 - 100), int(self.vyska/2 - 100)))
         font = pygame.font.SysFont("calibri", 41)
@@ -308,6 +387,9 @@ class App:
         self._display_surf.blit(text_img1, (20, 800))
 
     def mapa_update(self):
+        """
+        Podle pozice hráče vybírá, který tvor na hráče zaútočí, nebo otevře obchod.
+        """
         if self.mapa[hrac.pozice] == "L":
             self.tvor = self.tvori[0]
             self.priprava_otazky()
@@ -328,6 +410,9 @@ class App:
             self.zobrazuj_mapu = False
 
     def priprava_otazky(self):
+        """
+        Resetuje životy tvora a útok naškáluje podle skóre hráče.
+        """
         #resetování životů tvora a škálování
         self.tvor.max_zivoty = int(self.tvor.dflt_zivoty + hrac.score/10)
         self.tvor.zivoty = self.tvor.max_zivoty
@@ -338,6 +423,9 @@ class App:
         self.zobrazuj_otazku = True
 
     def vyber_otazky(self):
+        """
+        Vybere otázku a nadefinuje tlačítka s odpověďmi.
+        """
         self.otazka = otazky.Otazka(random.choice(self.tvor.otazky))
         random.shuffle(self.otazka.vsechnyOdpovedi)
         self.tlacitkoOdpoved0 = button.Button(int(self.sirka/2 - self.sirkaTlacitkaOdpovedi/2), 220, self.img_tlacitkoOdpoved, str(self.otazka.vsechnyOdpovedi[0]))
@@ -346,6 +434,14 @@ class App:
         self.tlacitkoOdpoved3 = button.Button(int(self.sirka/2 - self.sirkaTlacitkaOdpovedi/2), 640, self.img_tlacitkoOdpoved, str(self.otazka.vsechnyOdpovedi[3]))        
 
     def souboj(self, vyherce, porazeny):
+        
+        """
+        Provede útok jednoho objektu na druhý.
+
+        :param vyherce: výherce
+        :param porazeny: poražený
+        :return: True pokud poražený zemřel
+        """
         porazeny.zivoty = porazeny.zivoty - vyherce.utok
         if porazeny.zivoty <= 0:
             self.zobrazuj_mapu = True
@@ -356,6 +452,9 @@ class App:
             return False
         
     def zobraz_obchod(self):
+        """
+        Vykreslení obrazovky obchodu.
+        """
         self._display_surf.blit(self.img_obchod, (0,0))
 
         self.tlacitkoZpet.zobraz(self._display_surf)
@@ -389,6 +488,9 @@ class App:
         self._display_surf.blit(text_img5, (20, 800))
 
     def zobraz_add(self):
+        """
+        Vykreslení obrazovky pro přidání otázek.
+        """
         self.tlacitkoZpet.zobraz(self._display_surf)
 
         font = pygame.font.SysFont("calibri", 30)
@@ -413,6 +515,9 @@ class App:
         self.tlacitkoSubmit.zobraz(self._display_surf)
         
     def game_over(self):
+        """
+        Vykreslení obrazovky pro konec hry.
+        """
         self.zobrazuj_mapu = False
         self.zobrazuj_menu = False
         self.zobrazuj_otazku = False
@@ -427,6 +532,10 @@ class App:
         self.tlacitkoQuit2.zobraz(self._display_surf)
 
 if __name__ == "__main__" :
-    hrac = Hrac(50, "obrazky/ritíř_1.png", (5,3), 10)
+    
+    """
+    Vytvoření hráče a spuštění aplikace.
+    """
+    hrac = Hrac(50, "obrazky/rytíř.png", (5,3), 10)
     theApp = App()
     theApp.on_execute()
